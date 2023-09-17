@@ -22,6 +22,5 @@ return {
     end,
     keys = {
         { "<C-b>", "<CMD>:NvimTreeToggle<CR>", mode = {"n"}, desc="[T]oggle [T]ree" },
-        { "<leader>tf", "<CMD>:NvimTreeFocus<CR>", mode = {"n"}, desc="[T]ree [F]ocus" },
     },
 }
