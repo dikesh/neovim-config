@@ -7,17 +7,12 @@ return {
     },
     config = function()
         require("nvim-tree").setup {
-            filters = {
-                dotfiles = true,
-            },
+            filters = { dotfiles = true },
             renderer = {
-                indent_markers = {
-                    enable = true,
-                }
+                indent_markers = { enable = true, }
             },
-            update_focused_file = {
-                enable = true
-            }
+            update_focused_file = { enable = true },
+            actions = { open_file = { quit_on_open = true } }
         }
     end,
     keys = {
