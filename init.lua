@@ -6,7 +6,6 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 
 require("core.set")
-require("core.remap")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 

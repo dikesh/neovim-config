@@ -26,6 +26,7 @@ vim.opt.updatetime = 50
 vim.opt.colorcolumn = "100"
 
 vim.g.python3_host_prog = "/home/dikesh/.virtualenvs/nvim/bin/python"
+vim.g.mapleader = " "
 
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     pattern = { "*" },
