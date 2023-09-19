@@ -19,7 +19,7 @@ vim.opt.termguicolors = true
 
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
-vim.opt.isfname:append("@-@")
+vim.opt.isfname: append("@-@")
 
 vim.opt.updatetime = 50
 
@@ -27,8 +27,3 @@ vim.opt.colorcolumn = "100"
 
 vim.g.python3_host_prog = "/home/dikesh/.virtualenvs/nvim/bin/python"
 vim.g.mapleader = " "
-
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-    pattern = { "*" },
-    command = [[%s/\s\+$//e]],
-})
