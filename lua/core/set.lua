@@ -25,5 +25,8 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "100"
 
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 vim.g.python3_host_prog = "/home/dikesh/.virtualenvs/nvim/bin/python"
 vim.g.mapleader = " "
