@@ -12,10 +12,9 @@ return {
                 indent_markers = { enable = true, }
             },
             update_focused_file = { enable = true },
-            actions = { open_file = { quit_on_open = true } }
         }
     end,
     keys = {
-        { "<C-b>", "<CMD>:NvimTreeToggle<CR>", mode = {"n"}, desc="[T]oggle [T]ree" },
+        { "<C-b>", "<CMD>:NvimTreeToggle<CR>", mode = { "n" }, desc = "[T]oggle [T]ree" },
     },
 }

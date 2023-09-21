@@ -18,4 +18,3 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("core.plugins")
 
 vim.cmd.colorscheme "catppuccin"
-
