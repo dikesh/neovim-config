@@ -1,4 +1,5 @@
 require("core.set")
+require("core.keymap")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
