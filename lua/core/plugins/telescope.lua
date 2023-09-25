@@ -8,5 +8,6 @@ return {
         { "<leader>sg", "<CMD>Telescope live_grep<CR>",  mode = { "n" }, desc = "[S]earch with [G]rep" },
         { "<leader>sh", "<CMD>Telescope help_tags<CR>",  mode = { "n" }, desc = "[S]each [H]elp Tags" },
         { "<leader>km", "<CMD>Telescope keymaps<CR>",    mode = { "n" }, desc = "[K]ey [M]aps" },
+        { "<leader>tr", "<CMD>Telescope resume<CR>",     mode = { "n" }, desc = "[T]elescope [R]esume" },
     },
 }
