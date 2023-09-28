@@ -27,3 +27,5 @@ vim.opt.colorcolumn = "100"
 
 vim.g.python3_host_prog = "/home/dikesh/.virtualenvs/nvim/bin/python"
 vim.g.mapleader = " "
+vim.g.timeout = true
+vim.g.timeoutlen = 5000
