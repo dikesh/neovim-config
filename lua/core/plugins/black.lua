@@ -1,7 +1,7 @@
 return {
     'psf/black',
     -- Lazy load on file type
-    -- ft = "py",
+    ft = "python",
     config = function()
         vim.api.nvim_create_augroup("black_on_save", { clear = true })
 
