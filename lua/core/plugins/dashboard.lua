@@ -3,7 +3,7 @@ return {
     event = 'VimEnter',
     config = function()
         require('dashboard').setup {
-            theme = "hyper",
+            theme = "doom",
             config = {
                 header = {
                     "  ,_-~~~-,    _-~~-_              ",
@@ -31,6 +31,32 @@ return {
                     "                                   ",
                     "                                   ",
                 },
+                center = {
+                    {
+                        desc = "Search File",
+                        key = "f",
+                        key_format = ' %s',
+                        action = "Telescope find_files",
+                    },
+                    {
+                        desc = "Live Grep",
+                        key = "g",
+                        key_format = ' %s',
+                        action = "Telescope live_grep",
+                    },
+                    {
+                        desc = "Keymaps",
+                        key = "k",
+                        key_format = ' %s',
+                        action = "Telescope keymaps",
+                    },
+                    {
+                        desc = "Help Tags",
+                        key = "h",
+                        key_format = ' %s',
+                        action = "Telescope help_tags",
+                    },
+                }
             },
         }
     end,

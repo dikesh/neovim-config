@@ -1,6 +1,6 @@
 return {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.2',
+    lazy = false,
     dependencies = { 'nvim-lua/plenary.nvim' },
     keys = {
         { "<leader>sf", "<CMD>Telescope find_files<CR>", mode = { "n" }, desc = "[S]each [F]iles" },
