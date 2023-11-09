@@ -1,11 +1,15 @@
 return {
     'nvimdev/dashboard-nvim',
     event = 'VimEnter',
+    dependencies = { { 'nvim-tree/nvim-web-devicons' } },
     config = function()
         require('dashboard').setup {
             theme = "doom",
             config = {
                 header = {
+                    "                                   ",
+                    "                                   ",
+                    "                                   ",
                     "  ,_-~~~-,    _-~~-_              ",
                     " /        ^-_/      \\_    _-~-.   ",
                     "|      /\\  ,          `-_/     \\  ",
@@ -60,5 +64,7 @@ return {
             },
         }
     end,
-    dependencies = { { 'nvim-tree/nvim-web-devicons' } }
+    keys = {
+        { "<leader>sd", "<CMD>Dashboard<CR>", mode = { "n" }, desc = "[S]how [D]ashboard" },
+    },
 }
