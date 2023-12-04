@@ -90,7 +90,7 @@ return {
 
             require('mason-lspconfig').setup({
                 ensure_installed = {
-                    "lua_ls", "pyright", "ruff_lsp", "vimls",
+                    "lua_ls", "pyright", "ruff_lsp", "vimls", "bashls"
                 },
                 handlers = {
                     lsp_zero.default_setup,

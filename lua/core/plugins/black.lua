@@ -7,6 +7,7 @@ return {
 
         vim.api.nvim_create_autocmd('BufWritePre', {
             command = 'Black',
+            pattern = '*.py',
             group = 'black_on_save'
         })
     end
