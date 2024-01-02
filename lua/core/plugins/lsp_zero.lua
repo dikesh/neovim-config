@@ -78,6 +78,7 @@ return {
                 },
                 servers = {
                     ['lua_ls'] = { "lua" },
+                    ['ruff_lsp'] = { 'python' }
                 }
             })
 
