@@ -78,7 +78,8 @@ return {
                 },
                 servers = {
                     ['lua_ls'] = { "lua" },
-                    ['ruff_lsp'] = { 'python' }
+                    ['ruff_lsp'] = { 'python' },
+                    ['tsserver'] = { 'typescript', 'javascript' },
                 }
             })
 
@@ -91,7 +92,7 @@ return {
 
             require('mason-lspconfig').setup({
                 ensure_installed = {
-                    "lua_ls", "pyright", "ruff_lsp", "vimls", "bashls"
+                    "lua_ls", "pyright", "ruff_lsp", "vimls", "tsserver"
                 },
                 handlers = {
                     lsp_zero.default_setup,
