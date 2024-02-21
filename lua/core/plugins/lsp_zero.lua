@@ -77,6 +77,7 @@ return {
                     timeout_ms = 10000,
                 },
                 servers = {
+                    ['jsonls'] = { "json" },
                     ['lua_ls'] = { "lua" },
                     ['ruff_lsp'] = { 'python' },
                     ['tsserver'] = { 'typescript', 'javascript' },
@@ -92,7 +93,7 @@ return {
 
             require('mason-lspconfig').setup({
                 ensure_installed = {
-                    "lua_ls", "pyright", "ruff_lsp", "vimls", "tsserver"
+                    "lua_ls", "pyright", "ruff_lsp", "vimls", "tsserver", "jsonls"
                 },
                 handlers = {
                     lsp_zero.default_setup,

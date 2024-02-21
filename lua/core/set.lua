@@ -29,3 +29,10 @@ vim.g.python3_host_prog = "/home/dikesh/.virtualenvs/nvim/bin/python"
 vim.g.mapleader = " "
 vim.g.timeout = true
 vim.g.timeoutlen = 5000
+
+vim.api.nvim_create_augroup('setIndent', { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+    group = "setIndent",
+    pattern = "json",
+    command = "setlocal shiftwidth=2 tabstop=2"
+})
