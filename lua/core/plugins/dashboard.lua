@@ -63,6 +63,26 @@ return {
                 }
             },
         }
+
+        -- Show dashboard on all buffer deletion
+        vim.api.nvim_create_augroup("dashboard_on_empty", { clear = true })
+        vim.api.nvim_create_autocmd("BufDelete", {
+            group = "dashboard_on_empty",
+            callback = function(args)
+                -- Skip when no match
+                if args.match == '' then return end
+                -- Renaminig buffers excluding `No Name` buffer
+                local rem_buffers = 0
+                for _, bufinfo in ipairs(vim.fn.getbufinfo({ buflisted = 1 })) do
+                    if bufinfo.name ~= args.match and bufinfo.name ~= "" then
+                        rem_buffers = rem_buffers + 1
+                    end
+                end
+                if rem_buffers == 0 then
+                    vim.cmd('Dashboard')
+                end
+            end,
+        })
     end,
     keys = {
         { "<leader>sd", "<CMD>Dashboard<CR>", mode = { "n" }, desc = "[S]how [D]ashboard" },
