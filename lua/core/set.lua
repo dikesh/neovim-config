@@ -15,6 +15,8 @@ vim.opt.wrap = true
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
+vim.opt.conceallevel = 1
+
 vim.opt.termguicolors = true
 
 vim.opt.scrolloff = 8
