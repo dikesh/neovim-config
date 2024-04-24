@@ -60,6 +60,12 @@ return {
                         key_format = ' %s',
                         action = "Telescope help_tags",
                     },
+                    {
+                        desc = "Lazy Git",
+                        key = "l",
+                        key_format = ' %s',
+                        action = "LazyGit",
+                    },
                 }
             },
         }
