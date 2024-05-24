@@ -67,6 +67,10 @@ return {
             lsp_zero.extend_lspconfig()
 
             lsp_zero.on_attach(function(client, bufnr)
+                if client.name == 'ruff' then
+                    -- Disable hover in favor of Pyright
+                    client.server_capabilities.hoverProvider = false
+                end
                 lsp_zero.default_keymaps({ buffer = bufnr })
             end)
 
@@ -79,7 +83,7 @@ return {
                 servers = {
                     ['jsonls'] = { "json" },
                     ['lua_ls'] = { "lua" },
-                    ['ruff_lsp'] = { 'python' },
+                    ['ruff'] = { 'python' },
                     ['tsserver'] = { 'typescript', 'javascript' },
                 }
             })
@@ -93,7 +97,7 @@ return {
 
             require('mason-lspconfig').setup({
                 ensure_installed = {
-                    "lua_ls", "pyright", "ruff_lsp", "vimls", "tsserver", "jsonls"
+                    "lua_ls", "pyright", "ruff", "vimls", "tsserver", "jsonls"
                 },
                 handlers = {
                     lsp_zero.default_setup,
