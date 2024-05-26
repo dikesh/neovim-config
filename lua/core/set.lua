@@ -29,6 +29,7 @@ vim.opt.colorcolumn = "100"
 
 vim.g.python3_host_prog = "/home/dikesh/.cache/pypoetry/virtualenvs/nvim-CY3QcLP4-py3.12/bin/python"
 vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 vim.g.timeout = true
 vim.g.timeoutlen = 5000
 
