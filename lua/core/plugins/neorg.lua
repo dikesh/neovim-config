@@ -7,7 +7,7 @@ return {
         require('neorg').setup {
             load = {
                 ["core.defaults"] = {},
-                ["core.concealer"] = {},
+                ["core.concealer"] = { config = { folds = false } },
                 ["core.dirman"] = {
                     config = {
                         workspaces = {
