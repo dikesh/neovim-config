@@ -13,6 +13,7 @@ return {
                         workspaces = {
                             home = "~/notes/home", -- Format: <name_of_workspace> = <path_to_workspace_root>
                             work = "~/notes/work",
+                            arch = "~/notes/arch",
                         },
                         index = "index.norg", -- The name of the main (root) .norg file
                     }
