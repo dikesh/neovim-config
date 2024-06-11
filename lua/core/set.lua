@@ -37,6 +37,6 @@ vim.g.timeoutlen = 5000
 vim.api.nvim_create_augroup('setIndent', { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
     group = "setIndent",
-    pattern = "json",
+    pattern = { "vue", "json", "typescript", "javascript" },
     command = "setlocal shiftwidth=2 tabstop=2"
 })
