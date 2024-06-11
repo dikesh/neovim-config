@@ -81,9 +81,11 @@ return {
                     timeout_ms = 10000,
                 },
                 servers = {
+                    ['cssls'] = { "css" },
                     ['jsonls'] = { "json" },
                     ['lua_ls'] = { "lua" },
                     ['ruff'] = { 'python' },
+                    ['tsserver'] = { 'typescript' },
                 }
             })
 
@@ -96,6 +98,7 @@ return {
 
             require('mason-lspconfig').setup({
                 ensure_installed = {
+                    "cssls",
                     "jsonls",
                     "lua_ls",
                     "pyright",
