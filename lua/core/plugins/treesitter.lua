@@ -19,6 +19,7 @@ return {
                 "norg",
                 "python",
                 "query",
+                "typescript",
                 "vim",
                 "vimdoc",
                 "vue",
