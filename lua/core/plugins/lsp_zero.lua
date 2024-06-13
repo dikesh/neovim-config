@@ -86,6 +86,7 @@ return {
                     ['lua_ls'] = { "lua" },
                     ['ruff'] = { 'python' },
                     ['tsserver'] = { 'typescript' },
+                    ['eslint'] = { 'vue' },
                 }
             })
 
@@ -99,6 +100,7 @@ return {
             require('mason-lspconfig').setup({
                 ensure_installed = {
                     "cssls",
+                    "eslint",
                     "jsonls",
                     "lua_ls",
                     "pyright",
