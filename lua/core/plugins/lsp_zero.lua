@@ -106,6 +106,7 @@ return {
                     "pyright",
                     "ruff",
                     "tsserver",
+                    "unocss",
                     "vimls",
                     "volar"
                 },
@@ -119,6 +120,9 @@ return {
                     -- Setup for volar
                     function(server_name)
                         require('lspconfig')[server_name].setup({})
+                    end,
+                    unocss = function()
+                        require('lspconfig').unocss.setup({})
                     end,
                     volar = function()
                         require('lspconfig').volar.setup({})
