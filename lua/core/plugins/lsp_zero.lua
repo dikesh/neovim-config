@@ -85,7 +85,7 @@ return {
                     ['jsonls'] = { "json" },
                     ['lua_ls'] = { "lua" },
                     ['ruff'] = { 'python' },
-                    ['tsserver'] = { 'typescript' },
+                    ['tsserver'] = { 'typescript', 'javascript' },
                     ['eslint'] = { 'vue' },
                 }
             })

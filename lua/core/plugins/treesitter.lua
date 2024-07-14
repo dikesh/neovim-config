@@ -13,6 +13,7 @@ return {
                 "css",
                 "csv",
                 "html",
+                "hurl",
                 "javascript",
                 "json",
                 "lua",
