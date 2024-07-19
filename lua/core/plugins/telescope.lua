@@ -4,11 +4,11 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim' },
     keys = {
         {
-            "<leader>sf",
+            "<C-p>",
             "<CMD>Telescope find_files<CR>",
             mode = { "n" },
             desc =
-            "[S]each [F]iles"
+            "Find Files"
         },
         {
             "<leader>sb",
