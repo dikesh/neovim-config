@@ -1,6 +1,8 @@
 vim.keymap.set("n", "<leader>]", "<CMD>bnext<CR>", { desc = "[B]uffer [N]ext" })
 vim.keymap.set("n", "<leader>[", "<CMD>bprevious<CR>", { desc = "[B]uffer [P]revious" })
 vim.keymap.set("n", "<leader>bd", "<CMD>bd<CR>", { desc = "[B]uffer [D]elete" })
+vim.keymap.set("n", "<leader>sc0", "<CMD>set conceallevel=0<CR>", { desc = "[S]et [C]onceallevel [0]" })
+vim.keymap.set("n", "<leader>sc1", "<CMD>set conceallevel=1<CR>", { desc = "[S]et [C]onceallevel [1]" })
 vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { desc = "[M]ove [D]own" })
 vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { desc = "[M]ove [U]p" })
 vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi", { desc = "[M]ove [D]own" })
