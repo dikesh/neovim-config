@@ -31,10 +31,18 @@ vim.g.maplocalleader = "\\"
 vim.g.timeout = true
 vim.g.timeoutlen = 5000
 
--- Indent for json file
+-- Set Indent
 vim.api.nvim_create_augroup('setIndent', { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
     group = "setIndent",
     pattern = { "css", "javascript", "json", "typescript", "vue", },
     command = "setlocal shiftwidth=2 tabstop=2"
+})
+
+-- Set Conceal Level
+vim.api.nvim_create_augroup('setConcealLevel', { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+    group = "setConcealLevel",
+    pattern = { "norg", },
+    command = "setlocal conceallevel=1"
 })
