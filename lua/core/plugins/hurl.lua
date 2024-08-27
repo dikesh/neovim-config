@@ -20,6 +20,7 @@ return {
     },
     keys = {
         -- Run API request
-        { "<leader>a", "<cmd>HurlRunner<CR>", desc = "Run All Hurl requests" },
+        { "<leader>ar", "<cmd>HurlRunner<CR>",           desc = "Run All Hurl requests" },
+        { "<leader>al", "<cmd>HurlShowLastResponse<CR>", desc = "Hurl Show Last Response" },
     },
 }
