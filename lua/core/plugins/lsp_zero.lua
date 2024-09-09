@@ -134,7 +134,7 @@ return {
                             .. '/node_modules/@vue/language-server'
                             .. '/node_modules/@vue/typescript-plugin'
 
-                        require('lspconfig').tsserver.setup({
+                        require('lspconfig').ts_ls.setup({
                             init_options = {
                                 plugins = {
                                     {
