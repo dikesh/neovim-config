@@ -85,7 +85,7 @@ return {
                     ['jsonls'] = { "json" },
                     ['lua_ls'] = { "lua" },
                     ['ruff'] = { 'python' },
-                    ['tsserver'] = { 'typescript', 'javascript' },
+                    ['ts_ls'] = { 'typescript', 'javascript' },
                     ['eslint'] = { 'vue' },
                 }
             })
@@ -105,7 +105,7 @@ return {
                     "lua_ls",
                     "pyright",
                     "ruff",
-                    "tsserver",
+                    "ts_ls",
                     "unocss",
                     "vimls",
                     "volar"
@@ -127,7 +127,7 @@ return {
                     volar = function()
                         require('lspconfig').volar.setup({})
                     end,
-                    tsserver = function()
+                    ts_ls = function()
                         local vue_typescript_plugin = require('mason-registry')
                             .get_package('vue-language-server')
                             :get_install_path()
