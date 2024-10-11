@@ -1,14 +1,18 @@
 return {
     {
         'VonHeikemen/lsp-zero.nvim',
-        branch = 'v3.x',
+        branch = 'v4.x',
         lazy = true,
-        config = false,
         init = function()
             -- Disable automatic setup, we are doing it manually
             vim.g.lsp_zero_extend_cmp = 0
             vim.g.lsp_zero_extend_lspconfig = 0
         end,
+        config = function()
+            require('lsp-zero').ui({
+                float_border = 'rounded',
+            })
+        end
     },
     {
         'williamboman/mason.nvim',
@@ -41,7 +45,7 @@ return {
                 mapping = cmp.mapping.preset.insert({
                     ['<CR>'] = cmp.mapping.confirm({ select = true }),
                     ['<Tab>'] = cmp_action.tab_complete(),
-                    ['<S-Tab>'] = cmp_action.select_prev_or_fallback(),
+                    ['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = 'select' }),
                     ['<C-Space>'] = cmp.mapping.complete(),
                     ['<C-u>'] = cmp.mapping.scroll_docs(-4),
                     ['<C-d>'] = cmp.mapping.scroll_docs(4),
@@ -86,7 +90,7 @@ return {
                     ['lua_ls'] = { "lua" },
                     ['ruff'] = { 'python' },
                     ['ts_ls'] = { 'typescript', 'javascript' },
-                    ['eslint'] = { 'vue' },
+                    ['eslint'] = { 'vue', 'html' },
                 }
             })
 
