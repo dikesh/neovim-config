@@ -105,6 +105,7 @@ return {
                 },
                 servers = {
                     ['cssls'] = { "css" },
+                    ['gopls'] = { "go" },
                     ['jsonls'] = { "json" },
                     ['lua_ls'] = { "lua" },
                     ['ruff'] = { 'python' },
@@ -124,6 +125,7 @@ return {
                 ensure_installed = {
                     "cssls",
                     "eslint",
+                    "gopls",
                     "jsonls",
                     "lua_ls",
                     "pyright",

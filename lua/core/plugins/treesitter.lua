@@ -12,6 +12,7 @@ return {
                 "cpp",
                 "css",
                 "csv",
+                "go",
                 "html",
                 "hurl",
                 "javascript",
