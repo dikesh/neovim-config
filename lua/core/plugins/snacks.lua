@@ -3,7 +3,10 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
+        -- Lazygit
         lazygit = { enabled = true },
-        win = { enabled = true },
+    },
+    keys = {
+        { "<leader>lg", function() Snacks.lazygit() end, desc = "Lazygit" },
     },
 }

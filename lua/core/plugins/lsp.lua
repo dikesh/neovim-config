@@ -19,7 +19,7 @@ return {
             -- Trigger
             trigger = {
                 completion = {
-                    blocked_trigger_characters = { ' ', '\n', '\t', ',' },
+                    blocked_trigger_characters = { ' ', '\n', '\t', ',', '{', '}', },
                     show_on_insert_on_trigger_character = false,
                 },
             },
@@ -46,8 +46,6 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
-        cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
-        event = { 'BufReadPre', 'BufNewFile' },
         dependencies = {
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
@@ -66,7 +64,7 @@ return {
             vim.diagnostic.config({
                 float = {
                     border = 'rounded',
-                    source = 'always'
+                    source = true,
                 },
                 severity_sort = true,
                 signs = {
@@ -93,7 +91,7 @@ return {
                     vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>', opts)
                     vim.keymap.set('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
                     vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
-                    vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
+                    vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
                 end,
             })
 
@@ -165,6 +163,7 @@ return {
                                             "describe",
                                             "before_each",
                                             "after_each",
+                                            "Snacks",
                                         },
                                     }
                                 }
