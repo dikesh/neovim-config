@@ -8,6 +8,8 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
+vim.opt.cb = "unnamedplus"
+
 vim.opt.smartindent = true
 
 vim.opt.wrap = true
@@ -35,7 +37,7 @@ vim.g.timeoutlen = 5000
 vim.api.nvim_create_augroup('setIndent', { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
     group = "setIndent",
-    pattern = { "css", "javascript", "json", "typescript", "vue", },
+    pattern = { "css", "scss", "javascript", "json", "typescript", "vue", "yuck", },
     command = "setlocal shiftwidth=2 tabstop=2"
 })
 
@@ -45,4 +47,13 @@ vim.api.nvim_create_autocmd("FileType", {
     group = "setConcealLevel",
     pattern = { "norg", },
     command = "setlocal conceallevel=1"
+})
+
+-- Highlight on yank
+vim.api.nvim_create_autocmd('TextYankPost', {
+    desc = "Highlight when yanking text",
+    group = vim.api.nvim_create_augroup('highlight-on-yank', { clear = true }),
+    callback = function()
+        vim.highlight.on_yank()
+    end
 })
