@@ -49,7 +49,20 @@ return {
         dependencies = {
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
-            "saghen/blink.cmp"
+            "saghen/blink.cmp",
+            {
+                "folke/lazydev.nvim",
+                ft = "lua", -- only load on lua files
+                opts = {
+                    library = {
+                        "snacks.nvim",
+                        "lazy.nvim",
+                        -- See the configuration section for more details
+                        -- Load luvit types when the `vim.uv` word is found
+                        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+                    },
+                },
+            },
         },
         config = function()
             -- UI Configs
@@ -77,9 +90,6 @@ return {
                 },
                 underline = true,
             })
-
-            -- Capabilities
-            local capabilities = require('blink.cmp').get_lsp_capabilities()
 
             -- LspAttach is where you enable features that only work
             -- if there is a language server active in the file
@@ -130,6 +140,7 @@ return {
 
             require("mason").setup()
             require('mason-lspconfig').setup({
+                automatic_installation = false,
                 ensure_installed = {
                     "cssls",
                     "eslint",
@@ -148,29 +159,6 @@ return {
                     function(server_name)
                         lspconfig[server_name].setup({})
                     end,
-
-                    -- Lua LSP
-                    ["lua_ls"] = function()
-                        lspconfig.lua_ls.setup {
-                            capabilities = capabilities,
-                            settings = {
-                                Lua = {
-                                    diagnostics = {
-                                        globals = {
-                                            "bit",
-                                            "vim",
-                                            "it",
-                                            "describe",
-                                            "before_each",
-                                            "after_each",
-                                            "Snacks",
-                                        },
-                                    }
-                                }
-                            }
-                        }
-                    end,
-
                     -- typescript
                     ["ts_ls"] = function()
                         local vue_typescript_plugin = require('mason-registry')

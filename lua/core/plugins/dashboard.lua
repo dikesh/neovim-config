@@ -64,7 +64,7 @@ return {
                         desc = "Lazy Git",
                         key = "l",
                         key_format = ' %s',
-                        action = "LazyGit",
+                        action = "lua Snacks.lazygit()",
                     },
                 }
             },
