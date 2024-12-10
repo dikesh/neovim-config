@@ -1,3 +1,4 @@
+require("core.buflist")
 require("core.set")
 require("core.keymap")
 
