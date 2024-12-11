@@ -84,7 +84,7 @@ for i = 1, 5, 1 do
 end
 
 -- Bind key to toggle window
-vim.keymap.set("n", "<leader>bx", function()
+vim.keymap.set("n", "<leader><leader>", function()
     local win_config = v.nvim_win_get_config(win)
     v.nvim_win_set_config(win, { hide = not win_config.hide })
 end, { desc = "Toggle Buffer list" })

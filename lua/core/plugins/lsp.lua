@@ -74,22 +74,6 @@ return {
                 vim.lsp.handlers.signature_help,
                 { border = 'rounded' }
             )
-            vim.diagnostic.config({
-                float = {
-                    border = 'rounded',
-                    source = true,
-                },
-                severity_sort = true,
-                signs = {
-                    text = {
-                        [vim.diagnostic.severity.ERROR] = '✘',
-                        [vim.diagnostic.severity.WARN] = '▲',
-                        [vim.diagnostic.severity.HINT] = '⚑',
-                        [vim.diagnostic.severity.INFO] = '»',
-                    },
-                },
-                underline = true,
-            })
 
             -- LspAttach is where you enable features that only work
             -- if there is a language server active in the file
@@ -110,10 +94,7 @@ return {
                 group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
                 callback = function(args)
                     local client = vim.lsp.get_client_by_id(args.data.client_id)
-                    if client == nil then
-                        return
-                    end
-                    if client.name == 'ruff' then
+                    if client and client.name == 'ruff' then
                         -- Disable hover in favor of Pyright
                         client.server_capabilities.hoverProvider = false
                     end
@@ -122,17 +103,21 @@ return {
             })
 
             -- Format on save
-            vim.api.nvim_create_autocmd("LspAttach", {
-                desc = "Format on save",
-                group = vim.api.nvim_create_augroup("lsp", { clear = true }),
+            vim.api.nvim_create_autocmd('LspAttach', {
                 callback = function(args)
-                    vim.api.nvim_create_autocmd("BufWritePre", {
-                        buffer = args.buf,
-                        callback = function()
-                            vim.lsp.buf.format { async = false, id = args.data.client_id }
-                        end,
-                    })
-                end
+                    local client = vim.lsp.get_client_by_id(args.data.client_id)
+                    if not client then return end
+
+                    if client.supports_method('textDocument/formatting') then
+                        -- Format the current buffer on save
+                        vim.api.nvim_create_autocmd('BufWritePre', {
+                            buffer = args.buf,
+                            callback = function()
+                                vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
+                            end,
+                        })
+                    end
+                end,
             })
 
             -- LSP Config
