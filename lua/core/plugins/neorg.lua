@@ -1,8 +1,13 @@
 return {
     "nvim-neorg/neorg",
     dependencies = { "luarocks.nvim" },
-    lazy = false,  -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
-    version = "*", -- Pin Neorg to the latest stable release
+    cond = function()
+        local pwd  = vim.fn.getcwd()
+        local s, e = pwd:find('notes', nil, true)
+        return s ~= nil and e ~= nil
+    end,
+    lazy = false,
+    version = "*",
     opts = {
         load = {
             ["core.defaults"] = {},
