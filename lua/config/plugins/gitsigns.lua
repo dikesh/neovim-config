@@ -2,7 +2,7 @@ return {
     "lewis6991/gitsigns.nvim",
     event = "BufReadPre",
     config = function()
-        require("gitsigns").setup()
+        require('gitsigns').setup()
     end,
     keys = {
         { "<leader>hp", "<CMD>Gitsigns preview_hunk<CR>",    desc = "[H]unk [P]review" },
