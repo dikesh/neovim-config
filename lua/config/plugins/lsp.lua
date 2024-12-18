@@ -82,7 +82,15 @@ return {
             -- Setup mason and mason-lspconfig
             require("mason").setup()
             require("mason-lspconfig").setup {
-                ensure_installed = { "lua_ls", "pyright", "ruff", },
+                ensure_installed = {
+                    "gopls",
+                    "jsonls",
+                    "lua_ls",
+                    "pyright",
+                    "ruff",
+                    "ts_ls",
+                    "vimls",
+                },
                 automatic_installation = false,
                 handlers = handlers,
             }
