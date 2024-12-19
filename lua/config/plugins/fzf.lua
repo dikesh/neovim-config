@@ -1,5 +1,7 @@
 return {
     "ibhagwan/fzf-lua",
+    -- To use with dashboard actions
+    lazy = false,
     -- optional for icon support
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
