@@ -77,6 +77,26 @@ return {
                 function(server_name) -- default handler (optional)
                     require("lspconfig")[server_name].setup { capabilities = capabilities }
                 end,
+                ["ts_ls"] = function()
+                    require('lspconfig').ts_ls.setup {
+                        handlers = {
+                            -- Disable warning: File is a CommonJS module
+                            ["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
+                                if result.diagnostics ~= nil then
+                                    local idx = 1
+                                    while idx <= #result.diagnostics do
+                                        if result.diagnostics[idx].code == 80001 then
+                                            table.remove(result.diagnostics, idx)
+                                        else
+                                            idx = idx + 1
+                                        end
+                                    end
+                                end
+                                vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
+                            end,
+                        }
+                    }
+                end,
             }
 
             -- Setup mason and mason-lspconfig
