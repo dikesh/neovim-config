@@ -18,14 +18,14 @@ return {
 
             -- Completion
             completion = {
-                trigger = {
-                    blocked_trigger_characters = { ' ', '\n', '\t', ',', '{', '}', },
-                    show_on_insert_on_trigger_character = false,
-                },
+                accept = { auto_brackets = { enabled = false } },
                 documentation = {
                     auto_show = true,
                     auto_show_delay_ms = 200,
                     window = { border = "rounded" },
+                },
+                trigger = {
+                    show_on_insert_on_trigger_character = false,
                 },
             },
 
@@ -33,12 +33,14 @@ return {
             signature = {
                 enabled = true,
                 window = { border = "rounded" },
+                trigger = {
+                    blocked_trigger_characters = { ' ', '\n', '\t', ',', '{', '}', },
+                    show_on_insert_on_trigger_character = false,
+                },
             },
 
-            -- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-            -- adjusts spacing to ensure icons are aligned
-            nerd_font_variant = 'mono',
-
+            -- Disable command line completion
+            sources = { cmdline = {} },
         }
     },
     {
