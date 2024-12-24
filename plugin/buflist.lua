@@ -7,19 +7,16 @@ local get_loaded_buffers = function()
     local pwd = vim.fn.getcwd()
     local bufnames = {}
 
-    for _, buf_id in pairs(v.nvim_list_bufs()) do
-        if v.nvim_buf_is_loaded(buf_id) then
-            local buf_fullpath = v.nvim_buf_get_name(buf_id)
-            local _, i2 = buf_fullpath:find(pwd, nil, true)
-            if i2 then
-                table.insert(bufnames,
-                    {
-                        buf_id = buf_id,
-                        buf_fullpath = buf_fullpath,
-                        buf_path = buf_fullpath:sub(i2 + 2)
-                    }
-                )
-            end
+    for _, bufinfo in pairs(vim.fn.getbufinfo({ buflisted = 1, bufloaded = 1 })) do
+        local _, i2 = bufinfo.name:find(pwd, nil, true)
+        if i2 then
+            table.insert(bufnames,
+                {
+                    buf_id = bufinfo.bufnr,
+                    buf_fullpath = bufinfo.name,
+                    buf_path = bufinfo.name:sub(i2 + 2)
+                }
+            )
         end
     end
 
