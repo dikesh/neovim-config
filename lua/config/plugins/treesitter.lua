@@ -16,7 +16,7 @@ return {
                 "javascript",
                 "json",
                 "lua",
-                "norg",
+                "markdown",
                 "python",
                 "query",
                 "regex",

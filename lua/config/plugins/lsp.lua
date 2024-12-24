@@ -110,6 +110,7 @@ return {
                     "gopls",
                     "jsonls",
                     "lua_ls",
+                    "marksman",
                     "pyright",
                     "ruff",
                     "ts_ls",
