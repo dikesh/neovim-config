@@ -24,6 +24,11 @@ return {
                     auto_show_delay_ms = 200,
                     window = { border = "rounded" },
                 },
+                list = {
+                    selection = function(ctx)
+                        return ctx.mode == 'cmdline' and 'auto_insert' or 'preselect'
+                    end
+                },
                 trigger = {
                     show_on_insert_on_trigger_character = false,
                 },
@@ -38,9 +43,6 @@ return {
                     show_on_insert_on_trigger_character = false,
                 },
             },
-
-            -- Disable command line completion
-            sources = { cmdline = {} },
         }
     },
     {
