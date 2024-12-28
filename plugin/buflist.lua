@@ -25,17 +25,17 @@ end
 
 -- Create new buffer
 local buf_options = {
-    relative = "win",
-    width = 50,
-    height = 6,
-    row = 1,
-    col = vim.o.columns - 1,
     anchor = "NE",
-    focusable = false,
-    zindex = 30,
     border = "rounded",
+    col = vim.o.columns - 1,
+    focusable = false,
+    height = 6,
+    relative = "win",
+    row = 1,
     title = " Buffers ",
     title_pos = "center",
+    width = 50,
+    zindex = 30,
 }
 
 -- Open window
@@ -48,7 +48,7 @@ v.nvim_set_option_value("relativenumber", false, { win = win })
 v.nvim_set_hl(0, "BufListBoldText", { bold = true })
 
 -- Set text to buffer
-local set_text_to_buffer = function(current_file)
+local update_buffer = function(current_file)
     local lines = {}
     local hl_line = 0
     for idx, bufinfo in ipairs(get_loaded_buffers()) do
@@ -59,12 +59,18 @@ local set_text_to_buffer = function(current_file)
     end
     v.nvim_buf_set_lines(buf, 0, -1, false, lines)
     v.nvim_buf_add_highlight(buf, -1, "BufListBoldText", hl_line, 1, -1)
+
+    if #lines == 0 then
+        v.nvim_win_set_config(win, { hide = true })
+    else
+        v.nvim_win_set_config(win, { hide = false })
+    end
 end
 
 -- Update buffer list on navigation
 v.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
     group = v.nvim_create_augroup("loaded_buffers", { clear = true }),
-    callback = function(opt) set_text_to_buffer(opt.file) end
+    callback = function(opt) update_buffer(opt.file) end
 })
 
 -- Focus buffer
