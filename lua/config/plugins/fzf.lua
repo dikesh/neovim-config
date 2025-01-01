@@ -20,6 +20,6 @@ return {
         { "<leader>fr", "<CMD>FzfLua resume<CR>",               desc = "[T]elescope [R]esume" },
         { "<leader>ss", "<CMD>FzfLua lsp_document_symbols<CR>", desc = "[S]earch [S]ymbols" },
         { "<leader>gr", "<CMD>FzfLua lsp_references<CR>",       desc = "[G]to [R]eferences" },
-        { "ca",         "<CMD>FzfLua lsp_code_actions<CR>",     desc = "[C]ode [A]ctions" },
+        { "<leader>ca", "<CMD>FzfLua lsp_code_actions<CR>",     desc = "[C]ode [A]ctions" },
     },
 }
