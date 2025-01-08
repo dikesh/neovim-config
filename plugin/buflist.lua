@@ -1,11 +1,7 @@
 -- Local
 local v = vim.api
 
----@class LoadedBuffer
----@field buf_id integer
----@field buf_fullpath string
----@field buf_path string
----@return LoadedBuffer[]
+---@return {buf_id: integer, buf_fullpath: string, buf_path: string}[]
 local get_loaded_buffers = function()
     -- Current directory
     local pwd = vim.fn.getcwd()
@@ -44,13 +40,14 @@ local buf_options = {
     title_pos = "center",
     width = 50,
     zindex = 30,
+    hide = false,
 }
 
 ---@class M
 local M = {
     buf = 0,
     win = 0,
-    hide = true,
+    hide = false,
 }
 
 -- Initialize module
