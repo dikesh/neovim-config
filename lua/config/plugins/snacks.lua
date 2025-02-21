@@ -3,12 +3,15 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
+        explorer = { enabled = true },
         notifier = { enabled = true },
         lazygit = { enabled = true },
-        terminal = { win = { border = "rounded" } },
+        words = { notify_end = false },
     },
     keys = {
-        { "<c-/>",      function() Snacks.terminal("fish") end, desc = "Toggle Terminal" },
-        { "<leader>lg", function() Snacks.lazygit() end,        desc = "[L]azy [G]it" },
+        { "<leader>lg", function() Snacks.lazygit() end,             desc = "[L]azy [G]it" },
+        { "[w",         function() Snacks.words.jump(-1, false) end, desc = "Previous Reference" },
+        { "]w",         function() Snacks.words.jump(1, false) end,  desc = "Next Reference" },
+        { "<leader>e",  function() Snacks.explorer.open() end,       desc = "Open Explorer" },
     }
 }

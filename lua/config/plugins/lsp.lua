@@ -116,6 +116,7 @@ return {
                     "marksman",
                     "pyright",
                     "ruff",
+                    "terraformls",
                     "ts_ls",
                     "vimls",
                 },
