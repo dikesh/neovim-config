@@ -61,10 +61,10 @@ return {
                         action = "FzfLua helptags",
                     },
                     {
-                        desc = "Lazy",
+                        desc = "Lazygit",
                         key = "l",
                         key_format = ' %s',
-                        action = "Lazy",
+                        action = "Snacks.lazygit()",
                     },
                 }
             },
