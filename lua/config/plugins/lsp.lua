@@ -68,10 +68,17 @@ return {
         },
         config = function()
             -- UI Configs
-            vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-                vim.lsp.handlers.hover,
-                { border = 'rounded' }
-            )
+            -- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+            --     vim.lsp.handlers.hover,
+            --     { border = 'rounded' }
+            -- )
+
+            local hover = vim.lsp.buf.hover
+            ---@diagnostic disable-next-line: duplicate-set-field
+            vim.lsp.buf.hover = function()
+                return hover({ border = "rounded" })
+            end
+
 
             -- Get LSP capabilities
             local capabilities = require('blink.cmp').get_lsp_capabilities()
