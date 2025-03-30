@@ -49,10 +49,8 @@ return {
         }
     },
     {
-        "neovim/nvim-lspconfig",
+        "williamboman/mason.nvim",
         dependencies = {
-            "williamboman/mason.nvim",
-            "williamboman/mason-lspconfig.nvim",
             {
                 "folke/lazydev.nvim",
                 ft = "lua",
@@ -68,72 +66,80 @@ return {
         },
         config = function()
             -- UI Configs
-            -- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-            --     vim.lsp.handlers.hover,
-            --     { border = 'rounded' }
-            -- )
-
             local hover = vim.lsp.buf.hover
             ---@diagnostic disable-next-line: duplicate-set-field
             vim.lsp.buf.hover = function()
                 return hover({ border = "rounded" })
             end
 
+            -- Setup Mason
+            require("mason").setup()
 
             -- Get LSP capabilities
             local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-            -- Handlers to be set with mason-lspconfig
-            local handlers = {
-                -- The first entry (without a key) will be the default handler
-                -- and will be called for each installed server that doesn't have
-                -- a dedicated handler.
-                function(server_name) -- default handler (optional)
-                    require("lspconfig")[server_name].setup { capabilities = capabilities }
-                end,
-                ["ts_ls"] = function()
-                    require('lspconfig').ts_ls.setup {
-                        handlers = {
-                            -- Disable warning: File is a CommonJS module
-                            ["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
-                                if result.diagnostics ~= nil then
-                                    local idx = 1
-                                    while idx <= #result.diagnostics do
-                                        if result.diagnostics[idx].code == 80001 then
-                                            table.remove(result.diagnostics, idx)
-                                        else
-                                            idx = idx + 1
-                                        end
-                                    end
-                                end
-                                vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
-                            end,
+            -- Setup language servers.
+            vim.lsp.config('*', {
+                capabilities = capabilities,
+                root_markers = { ".git" },
+            })
+
+            -- Lua LS
+            vim.lsp.config.lua_ls = {
+                cmd = { "lua-language-server" },
+                filetypes = { "lua" },
+                settings = {
+                    Lua = {
+                        diagnostics = {
+                            globals = { 'vim' }
                         }
                     }
-                end,
+                }
             }
+            vim.lsp.enable("lua_ls")
 
-            -- Setup mason and mason-lspconfig
-            require("mason").setup()
-            require("mason-lspconfig").setup {
-                ensure_installed = {
-                    "gopls",
-                    "jsonls",
-                    "lua_ls",
-                    "marksman",
-                    "pyright",
-                    "ruff",
-                    "terraformls",
-                    "ts_ls",
-                    "vimls",
-                },
-                automatic_installation = false,
-                handlers = handlers,
+            -- Ruff
+            vim.lsp.config.ruff = {
+                cmd = { "ruff", "server" },
+                filetypes = { "python" },
             }
+            vim.lsp.enable("ruff")
 
-            -- LSP Customization
+            -- Pyright
+            vim.lsp.config.pyright = {
+                cmd = { "pyright-langserver", "--stdio" },
+                filetypes = { "python" },
+                settings = {
+                    python = {
+                        analysis = {
+                            autoSearchPaths = true,
+                            diagnosticMode = "openFilesOnly",
+                            useLibraryCodeForTypes = true
+                        }
+                    }
+                }
+            }
+            vim.lsp.enable("pyright")
+
+            -- Terraform
+            vim.lsp.config.tf_ls = {
+                cmd = { "terraform-ls", "serve" },
+                filetypes = { "terraform", "terraform-vars" },
+            }
+            vim.lsp.enable("tf_ls")
+
+            -- JSON
+            vim.lsp.config.jsonls = {
+                cmd = { "vscode-json-language-server", "--stdio" },
+                filetypes = { "json", "jsonc" },
+                init_options = { provideFormatter = true },
+            }
+            vim.lsp.enable("jsonls")
+
+            -- Format on save
             vim.api.nvim_create_autocmd('LspAttach', {
                 desc = "LSP Actions",
+                group = vim.api.nvim_create_augroup('lsp-actions', {}),
                 callback = function(args)
                     -- Get client
                     local client = vim.lsp.get_client_by_id(args.data.client_id)
@@ -141,23 +147,12 @@ return {
                     -- No client found
                     if not client then return end
 
-                    -- Disable hover in favor of Pyright
-                    if client.name == 'ruff' then
-                        client.server_capabilities.hoverProvider = false
-                    end
-
-                    -- Keymaps
-                    local opts = { buffer = args.buf }
-                    vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
-                    vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
-                    vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
-                    vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-
                     -- Format on save
-                    if client.supports_method('textDocument/formatting') then
+                    if client:supports_method('textDocument/formatting') then
                         -- Format the current buffer on save
                         vim.api.nvim_create_autocmd('BufWritePre', {
                             buffer = args.buf,
+                            group = vim.api.nvim_create_augroup('lsp-actions', { clear = false }),
                             callback = function()
                                 vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
                             end,
