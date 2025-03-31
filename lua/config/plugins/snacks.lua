@@ -4,8 +4,8 @@ return {
     lazy = false,
     opts = {
         explorer = { enabled = true },
-        notifier = { enabled = true },
         lazygit = { enabled = true },
+        notifier = { enabled = true },
         words = { notify_end = false },
     },
     keys = {

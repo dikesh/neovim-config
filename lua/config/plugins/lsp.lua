@@ -65,13 +65,6 @@ return {
             "saghen/blink.cmp",
         },
         config = function()
-            -- UI Configs
-            local hover = vim.lsp.buf.hover
-            ---@diagnostic disable-next-line: duplicate-set-field
-            vim.lsp.buf.hover = function()
-                return hover({ border = "rounded" })
-            end
-
             -- Setup Mason
             require("mason").setup()
 
@@ -146,6 +139,13 @@ return {
 
                     -- No client found
                     if not client then return end
+
+                    -- Keymaps
+                    local opts = { buffer = args.buf }
+                    local kmset = vim.keymap.set
+                    kmset('n', 'gd', function() vim.lsp.buf.definition() end, opts)
+                    kmset('n', 'gD', function() vim.lsp.buf.declaration() end, opts)
+                    kmset('n', 'K', function() vim.lsp.buf.hover({ border = "rounded" }) end, opts)
 
                     -- Format on save
                     if client:supports_method('textDocument/formatting') then
