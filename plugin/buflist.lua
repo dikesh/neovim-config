@@ -25,7 +25,8 @@ end
 
 -- Set new highlight group
 local hl_group_name = "BufListBoldText"
-v.nvim_set_hl(0, hl_group_name, { bold = true })
+local ns_id = v.nvim_create_namespace('')
+v.nvim_set_hl(ns_id, hl_group_name, { bold = true })
 
 -- Buffer options
 local buf_options = {
@@ -56,6 +57,7 @@ M.Init = function()
     local win = v.nvim_open_win(buf, false, buf_options)
     v.nvim_set_option_value("number", false, { win = win })
     v.nvim_set_option_value("relativenumber", false, { win = win })
+    v.nvim_win_set_hl_ns(win, ns_id)
 
     M.buf = buf
     M.win = win
@@ -78,7 +80,7 @@ M.update_buffer = function(current_file)
     end
 
     v.nvim_buf_set_lines(M.buf, 0, -1, false, lines)
-    v.nvim_buf_add_highlight(M.buf, -1, hl_group_name, hl_line, 1, -1)
+    vim.hl.range(M.buf, ns_id, hl_group_name, { hl_line, 0 }, { hl_line, -1 })
 
     if line_count < 2 then
         v.nvim_win_set_config(M.win, { hide = true })
