@@ -77,7 +77,7 @@ return {
                 root_markers = { ".git" },
             })
 
-            -- Lua LS
+            -- Lua LS Config
             vim.lsp.config.lua_ls = {
                 cmd = { "lua-language-server" },
                 filetypes = { "lua" },
@@ -89,16 +89,14 @@ return {
                     }
                 }
             }
-            vim.lsp.enable("lua_ls")
 
-            -- Ruff
+            -- Ruff Server Config
             vim.lsp.config.ruff = {
                 cmd = { "ruff", "server" },
                 filetypes = { "python" },
             }
-            vim.lsp.enable("ruff")
 
-            -- Pyright
+            -- Pyright LS Config
             vim.lsp.config.pyright = {
                 cmd = { "pyright-langserver", "--stdio" },
                 filetypes = { "python" },
@@ -112,22 +110,36 @@ return {
                     }
                 }
             }
-            vim.lsp.enable("pyright")
 
-            -- Terraform
+            -- Terraform LS Config
             vim.lsp.config.tf_ls = {
                 cmd = { "terraform-ls", "serve" },
                 filetypes = { "terraform", "terraform-vars" },
             }
-            vim.lsp.enable("tf_ls")
 
-            -- JSON
+            -- JSON LS Config
             vim.lsp.config.jsonls = {
                 cmd = { "vscode-json-language-server", "--stdio" },
                 filetypes = { "json", "jsonc" },
                 init_options = { provideFormatter = true },
             }
-            vim.lsp.enable("jsonls")
+
+            -- TS LS Config
+            vim.lsp.config.ts_ls = {
+                init_options = { hostInfo = 'neovim' },
+                cmd = { 'typescript-language-server', '--stdio' },
+                filetypes = {
+                    'javascript',
+                    'javascriptreact',
+                    'javascript.jsx',
+                    'typescript',
+                    'typescriptreact',
+                    'typescript.tsx',
+                },
+                root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
+            }
+
+            vim.lsp.enable({ "lua_ls", "ruff", "pyright", "tf_ls", "jsonls", "ts_ls" })
 
             -- Format on save
             vim.api.nvim_create_autocmd('LspAttach', {
