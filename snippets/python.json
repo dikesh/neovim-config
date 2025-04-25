@@ -1,0 +1,14 @@
+{
+  "p100": {
+    "prefix": "p100",
+    "body": "print(\"$0\" * 100)"
+  },
+  "imppl": {
+    "prefix": "imppl",
+    "body": "import polars as pl"
+  },
+  "imppprint": {
+    "prefix": "imppprint",
+    "body": "from rich.pretty import pprint"
+  }
+}
