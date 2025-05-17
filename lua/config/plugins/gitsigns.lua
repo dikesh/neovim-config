@@ -3,6 +3,9 @@ return {
     event = "BufReadPre",
     config = function()
         require('gitsigns').setup {
+            preview_config = {
+                border = 'rounded',
+            },
             on_attach = function(bufnr)
                 local gitsigns = require('gitsigns')
 

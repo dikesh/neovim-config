@@ -24,14 +24,6 @@ return {
                     auto_show_delay_ms = 200,
                     window = { border = "rounded" },
                 },
-                list = {
-                    selection = {
-                        preselect = function(ctx)
-                            return ctx.mode ~= 'cmdline'
-                                and not require('blink.cmp').snippet_active({ direction = 1 })
-                        end,
-                    }
-                },
                 trigger = {
                     show_on_insert_on_trigger_character = false,
                 },
@@ -44,6 +36,14 @@ return {
                 trigger = {
                     blocked_trigger_characters = { ' ', '\n', '\t', ',', '{', '}', },
                     show_on_insert_on_trigger_character = false,
+                },
+            },
+
+            -- Command Line
+            cmdline = {
+                keymap = {
+                    preset = 'cmdline',
+                    ['<CR>'] = { 'select_accept_and_enter', 'fallback' },
                 },
             },
         }
