@@ -139,7 +139,14 @@ return {
                 root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
             }
 
-            vim.lsp.enable({ "lua_ls", "ruff", "pyright", "tf_ls", "jsonls", "ts_ls" })
+            -- HTML LS Config
+            vim.lsp.config.html_ls = {
+                cmd = { "vscode-html-language-server", "--stdio" },
+                filetypes = { "html" },
+                init_options = { provideFormatter = true },
+            }
+
+            vim.lsp.enable({ "lua_ls", "ruff", "pyright", "tf_ls", "jsonls", "ts_ls", "html_ls" })
 
             -- Format on save
             vim.api.nvim_create_autocmd('LspAttach', {
