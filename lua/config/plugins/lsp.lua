@@ -77,7 +77,7 @@ return {
                 root_markers = { ".git" },
             })
 
-            -- Lua LS Config
+            -- Lua LS Config [lua-language-server]
             vim.lsp.config.lua_ls = {
                 cmd = { "lua-language-server" },
                 filetypes = { "lua" },
@@ -89,14 +89,16 @@ return {
                     }
                 }
             }
+            vim.lsp.enable('lua_ls')
 
-            -- Ruff Server Config
+            -- Ruff Server Config [ruff]
             vim.lsp.config.ruff = {
                 cmd = { "ruff", "server" },
                 filetypes = { "python" },
             }
+            vim.lsp.enable('ruff')
 
-            -- Pyright LS Config
+            -- Pyright LS Config [pyright]
             vim.lsp.config.pyright = {
                 cmd = { "pyright-langserver", "--stdio" },
                 filetypes = { "python" },
@@ -110,21 +112,24 @@ return {
                     }
                 }
             }
+            vim.lsp.enable('pyright')
 
-            -- Terraform LS Config
+            -- Terraform LS Config [terraform-ls]
             vim.lsp.config.tf_ls = {
                 cmd = { "terraform-ls", "serve" },
                 filetypes = { "terraform", "terraform-vars" },
             }
+            vim.lsp.enable('tf_ls')
 
-            -- JSON LS Config
-            vim.lsp.config.jsonls = {
+            -- JSON LS Config [json-lsp]
+            vim.lsp.config.json_ls = {
                 cmd = { "vscode-json-language-server", "--stdio" },
                 filetypes = { "json", "jsonc" },
                 init_options = { provideFormatter = true },
             }
+            vim.lsp.enable('json_ls')
 
-            -- TS LS Config
+            -- TS LS Config [typescript-language-server]
             vim.lsp.config.ts_ls = {
                 init_options = { hostInfo = 'neovim' },
                 cmd = { 'typescript-language-server', '--stdio' },
@@ -138,15 +143,26 @@ return {
                 },
                 root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
             }
+            vim.lsp.enable('ts_ls')
 
-            -- HTML LS Config
+            -- HTML LS Config [html-lsp]
             vim.lsp.config.html_ls = {
                 cmd = { "vscode-html-language-server", "--stdio" },
                 filetypes = { "html" },
-                init_options = { provideFormatter = true },
+                init_options = {
+                    provideFormatter = true,
+                    embeddedLanguages = { css = true, javascript = true },
+                    configurationSection = { 'html', 'css', 'javascript' },
+                },
             }
+            vim.lsp.enable('html_ls')
 
-            vim.lsp.enable({ "lua_ls", "ruff", "pyright", "tf_ls", "jsonls", "ts_ls", "html_ls" })
+            -- Rust Analyzer config [rust-analyzer]
+            vim.lsp.config.rust_analyzer = {
+                cmd = { 'rust-analyzer' },
+                filetypes = { 'rust' },
+            }
+            vim.lsp.enable('rust_analyzer')
 
             -- Format on save
             vim.api.nvim_create_autocmd('LspAttach', {
