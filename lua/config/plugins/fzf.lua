@@ -4,14 +4,17 @@ return {
     lazy = false,
     -- optional for icon support
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {
-        winopts = {
-            preview = {
-                layout = "vertical",
-                vertical = "up:65%",
+    config = function()
+        require('fzf-lua').register_ui_select()
+        require("fzf-lua").setup {
+            winopts = {
+                preview = {
+                    layout = "vertical",
+                    vertical = "up:65%",
+                }
             }
         }
-    },
+    end,
     keys = {
         { "<C-p>",      "<CMD>FzfLua files<CR>",                desc = "Find Files" },
         { "<leader>sg", "<CMD>FzfLua live_grep<CR>",            desc = "[S]earch with [G]rep" },
