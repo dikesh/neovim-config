@@ -18,6 +18,7 @@ return {
                 "json",
                 "lua",
                 "markdown",
+                "markdown_inline",
                 "python",
                 "query",
                 "regex",
@@ -26,6 +27,7 @@ return {
                 "vim",
                 "vimdoc",
                 "vue",
+                "yaml",
             },
             highlight = {
                 enable = true,
