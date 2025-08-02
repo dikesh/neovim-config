@@ -24,5 +24,6 @@ return {
         { "<leader>ss", "<CMD>FzfLua lsp_document_symbols<CR>", desc = "[S]earch [S]ymbols" },
         { "<leader>gr", "<CMD>FzfLua lsp_references<CR>",       desc = "[G]to [R]eferences" },
         { "<leader>ca", "<CMD>FzfLua lsp_code_actions<CR>",     desc = "[C]ode [A]ctions" },
+        { "<leader>ld", "<CMD>FzfLua diagnostics_document<CR>", desc = "[L]ist [D]iagnostics" },
     },
 }
