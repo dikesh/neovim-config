@@ -79,8 +79,10 @@ M.update_buffer = function(current_file)
         line_count = line_count + 1
     end
 
-    v.nvim_buf_set_lines(M.buf, 0, -1, false, lines)
-    vim.hl.range(M.buf, ns_id, hl_group_name, { hl_line, 0 }, { hl_line, -1 })
+    if current_file ~= '' then
+        v.nvim_buf_set_lines(M.buf, 0, -1, false, lines)
+        vim.hl.range(M.buf, ns_id, hl_group_name, { hl_line, 0 }, { hl_line, -1 })
+    end
 
     if line_count < 2 then
         v.nvim_win_set_config(M.win, { hide = true })

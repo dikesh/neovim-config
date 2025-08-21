@@ -15,6 +15,13 @@ vim.opt.hlsearch = false
 vim.opt.number = true
 vim.opt.relativenumber = true
 
+-- Toggle relativenumber
+vim.api.nvim_create_autocmd({ "InsertEnter", "InsertLeave" }, {
+    group = vim.api.nvim_create_augroup("toggle_rnu", { clear = true }),
+    callback = function(opt) vim.opt.relativenumber = opt.event ~= "InsertEnter" end
+
+})
+
 -- Diagnostic config
 vim.diagnostic.config({
     float = {

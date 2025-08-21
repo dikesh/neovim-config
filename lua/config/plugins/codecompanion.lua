@@ -36,5 +36,9 @@ return {
     dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-treesitter/nvim-treesitter",
-    }
+    },
+    keys = {
+        { "<leader>cc", "<CMD>CodeCompanionActions<CR>", mode = { "n" }, desc = "[C]ode [C]ompanion" },
+    },
+
 }

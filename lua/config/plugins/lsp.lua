@@ -164,6 +164,13 @@ return {
             }
             vim.lsp.enable('rust_analyzer')
 
+            -- Nushell
+            vim.lsp.config.nushell = {
+                cmd = { 'nu', '--lsp' },
+                filetypes = { 'nu' },
+            }
+            vim.lsp.enable('nushell')
+
             -- Format on save
             vim.api.nvim_create_autocmd('LspAttach', {
                 desc = "LSP Actions",
