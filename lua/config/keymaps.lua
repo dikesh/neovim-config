@@ -9,7 +9,6 @@ kmset("n", "<A-k>", ":m .-2<CR>==", { desc = "[M]ove [U]p" })
 kmset("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "[M]ove [B]lock [D]own" })
 kmset("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "[M]ove [B]lock [U]p" })
 kmset("n", "<leader>sf", "<CMD>source %<CR>", { desc = "[S]ource [F]ile" })
-kmset("n", "<leader>ar", "<CMD>!hurl %<CR>", { desc = "Run Hurl file" })
 
 -- Add / Delete brackets / quotes around
 local kv = {

@@ -13,7 +13,6 @@ return {
                 "go",
                 "hcl",
                 "html",
-                "hurl",
                 "javascript",
                 "json",
                 "lua",
