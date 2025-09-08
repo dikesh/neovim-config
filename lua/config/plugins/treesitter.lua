@@ -22,6 +22,7 @@ return {
                 "python",
                 "query",
                 "regex",
+                "scss",
                 "terraform",
                 "typescript",
                 "vim",
