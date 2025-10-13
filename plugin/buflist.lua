@@ -104,7 +104,21 @@ v.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 })
 
 -- Bind key to toggle window
-vim.keymap.set("n", "<leader><leader>", M.toggle_win, { desc = "Toggle Buffer list" })
+vim.keymap.set("n", "<leader>t", M.toggle_win, { desc = "Toggle Buffer list" })
+
+-- Focus buffer
+local focus_buffer = function(buf_idx)
+    for idx, bufinfo in ipairs(get_loaded_buffers()) do
+        if idx == buf_idx then
+            vim.cmd("b " .. bufinfo.buf_id)
+        end
+    end
+end
+
+-- Bind number keys to focus buffer
+for i = 1, 5, 1 do
+    vim.keymap.set("n", "<leader>" .. i, function() focus_buffer(i) end, { desc = "Focus buffer no. " .. i })
+end
 
 M.Init()
 return M
