@@ -40,25 +40,25 @@ return {
                         desc = "Search File",
                         key = "f",
                         key_format = ' %s',
-                        action = 'FzfLua files'
+                        action = 'Snacks.picker.smart()'
                     },
                     {
                         desc = "Live Grep",
                         key = "g",
                         key_format = ' %s',
-                        action = "FzfLua live_grep",
+                        action = "Snacks.picker.grep()",
                     },
                     {
                         desc = "Keymaps",
                         key = "k",
                         key_format = ' %s',
-                        action = "FzfLua keymaps",
+                        action = "Snacks.picker.keymaps()"
                     },
                     {
                         desc = "Help Tags",
                         key = "h",
                         key_format = ' %s',
-                        action = "FzfLua helptags",
+                        action = "Snacks.picker.help()"
                     },
                     {
                         desc = "Lazygit",
@@ -90,7 +90,4 @@ return {
             end,
         })
     end,
-    keys = {
-        { "<leader>sd", "<CMD>Dashboard<CR>", mode = { "n" }, desc = "[S]how [D]ashboard" },
-    },
 }

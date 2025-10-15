@@ -188,6 +188,7 @@ return {
                     kmset('n', 'gd', function() vim.lsp.buf.definition() end, opts)
                     kmset('n', 'gD', function() vim.lsp.buf.declaration() end, opts)
                     kmset('n', 'K', function() vim.lsp.buf.hover({ border = "rounded" }) end, opts)
+                    kmset('n', '<leader>ca', function() vim.lsp.buf.code_action() end, opts)
 
                     -- Format on save
                     if client:supports_method('textDocument/formatting') then
