@@ -6,6 +6,7 @@ return {
         explorer = { enabled = true },
         lazygit = { enabled = true },
         notifier = { enabled = true },
+        scratch = { enabled = true },
         picker = {
             enabled = true,
             prompt = "❯ ",
@@ -44,7 +45,7 @@ return {
         { "<leader>sf", function() Snacks.picker.files() end,           desc = "Find Files" },
         { "<leader>:",  function() Snacks.picker.command_history() end, desc = "Command History" },
         { "<leader>/",  function() Snacks.picker.git_grep() end,        desc = "Search with Grep" },
-        { "<leader>s/", function() Snacks.picker.grep() end,            desc = "Search with Grep" },
+        { "<leader>sg", function() Snacks.picker.grep() end,            desc = "Search with Grep" },
         { "<leader>sh", function() Snacks.picker.help() end,            desc = "Seach Help Tags" },
         { "<leader>sr", function() Snacks.picker.resume() end,          desc = "Telescope Resume" },
         {
@@ -57,6 +58,7 @@ return {
         { "<leader>sd", function() Snacks.picker.diagnostics_buffer() end, desc = "Show Diagnostics" },
         { "<leader>sD", function() Snacks.picker.diagnostics() end,        desc = "Show Diagnostics" },
         { "<leader>su", function() Snacks.picker.undo() end,               desc = "Undo History" },
+        { "<leader>sc", function() Snacks.picker.cliphist() end,           desc = "Clipboard History" },
         { "<leader>km", function() Snacks.picker.keymaps() end,            desc = "Key Maps" },
         { "<leader>gr", function() Snacks.picker.lsp_references() end,     desc = "Goto References" },
         { "<leader>gd", function() Snacks.picker.lsp_definitions() end,    desc = "Goto Definitions" },
