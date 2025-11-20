@@ -10,5 +10,9 @@
   "imppprint": {
     "prefix": "imppprint",
     "body": "from rich.pretty import pprint"
+  },
+  "pfield": {
+    "prefix": "pfield",
+    "body": "$2: ${1:str} = Field(None$3)"
   }
 }
