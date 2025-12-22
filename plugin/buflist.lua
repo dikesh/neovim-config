@@ -26,7 +26,7 @@ end
 -- Set new highlight group
 local hl_group_name = "BufListBoldText"
 local ns_id = v.nvim_create_namespace('')
-v.nvim_set_hl(ns_id, hl_group_name, { bold = true })
+v.nvim_set_hl(ns_id, hl_group_name, { bold = true, fg = "#c6a0f7" })
 
 -- Buffer options
 local buf_options = {
