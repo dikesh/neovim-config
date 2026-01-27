@@ -25,6 +25,7 @@ return {
                 "scss",
                 "terraform",
                 "typescript",
+                "vala",
                 "vim",
                 "vimdoc",
                 "vue",

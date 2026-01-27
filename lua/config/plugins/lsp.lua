@@ -171,6 +171,16 @@ return {
             }
             vim.lsp.enable('nushell')
 
+            -- Vala LS Config [vala-language-server]
+            vim.lsp.config.vala_ls = {
+                cmd = { 'vala-language-server' },
+                filetypes = { 'vala', 'genie' },
+                root_dir = vim.fs.dirname(
+                    vim.fs.find({ 'meson.build', '.git' }, { upward = true })[1]
+                ),
+            }
+            vim.lsp.enable('vala_ls')
+
             -- Format on save
             vim.api.nvim_create_autocmd('LspAttach', {
                 desc = "LSP Actions",
