@@ -1,7 +1,8 @@
-return {
-    "lewis6991/gitsigns.nvim",
-    event = "BufReadPre",
-    config = function()
+vim.api.nvim_create_autocmd('BufReadPre', {
+    once = true,
+    callback = function()
+        vim.pack.add({ "https://github.com/lewis6991/gitsigns.nvim" })
+
         require('gitsigns').setup {
             preview_config = {
                 border = 'rounded',
@@ -33,11 +34,13 @@ return {
                 end)
 
                 -- Actions
-                map('n', '<leader>hs', gitsigns.stage_hunk)
-                map('n', '<leader>hr', gitsigns.reset_hunk)
-                map('n', '<leader>hp', gitsigns.preview_hunk)
-                map('n', '<leader>bl', function() gitsigns.blame_line() end)
+                map('n', '<leader>hs', gitsigns.stage_hunk, { desc = "[H]unk [S]tage" })
+                map('n', '<leader>hr', gitsigns.reset_hunk, { desc = "[H]unk [R]eset" })
+                map('n', '<leader>hp', gitsigns.preview_hunk, { desc = "[H]unk [P]review" })
+                map('n', '<leader>bl', function()
+                    gitsigns.blame_line()
+                end, { desc = "[B]lame [L]ine" })
             end
         }
     end,
-}
+})
