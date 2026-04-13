@@ -38,3 +38,6 @@ vim.diagnostic.config({
     },
     underline = true,
 })
+
+-- UI2
+require('vim._core.ui2').enable({})

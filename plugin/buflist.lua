@@ -2,21 +2,18 @@
 local v = vim.api
 
 ---@return {buf_id: integer, buf_fullpath: string, buf_path: string}[]
-local get_loaded_buffers = function()
-    -- Current directory
+local get_listed_buffers = function()
     local pwd = vim.fn.getcwd()
     local bufnames = {}
 
-    for _, bufinfo in pairs(vim.fn.getbufinfo({ buflisted = 1, bufloaded = 1 })) do
+    for _, bufinfo in pairs(vim.fn.getbufinfo({ buflisted = 1 })) do
         local _, i2 = bufinfo.name:find(pwd, nil, true)
         if i2 then
-            table.insert(bufnames,
-                {
-                    buf_id = bufinfo.bufnr,
-                    buf_fullpath = bufinfo.name,
-                    buf_path = bufinfo.name:sub(i2 + 2)
-                }
-            )
+            table.insert(bufnames, {
+                buf_id = bufinfo.bufnr,
+                buf_fullpath = bufinfo.name,
+                buf_path = bufinfo.name:sub(i2 + 2)
+            })
         end
     end
 
@@ -66,12 +63,15 @@ end
 ---@param current_file string
 -- Update buffer lines and window visibility
 M.update_buffer = function(current_file)
-    -- Array of lines and line to be highlighted
+    if not v.nvim_win_is_valid(M.win) then
+        M.Init()
+    end
+
     local lines = {}
     local hl_line = 0
     local line_count = 0
 
-    for idx, bufinfo in ipairs(get_loaded_buffers()) do
+    for idx, bufinfo in ipairs(get_listed_buffers()) do
         table.insert(lines, " " .. idx .. ". " .. bufinfo.buf_path)
         if bufinfo.buf_fullpath == current_file then
             hl_line = idx - 1
@@ -93,22 +93,19 @@ end
 
 -- Toggle Window
 M.toggle_win = function()
+    if not v.nvim_win_is_valid(M.win) then
+        return
+    end
     M.hide = not M.hide
     v.nvim_win_set_config(M.win, { hide = M.hide })
 end
-
--- Update buffer list on navigation
-v.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-    group = v.nvim_create_augroup("loaded_buffers", { clear = true }),
-    callback = function(opt) M.update_buffer(opt.file) end
-})
 
 -- Bind key to toggle window
 vim.keymap.set("n", "<leader>t", M.toggle_win, { desc = "Toggle Buffer list" })
 
 -- Focus buffer
 local focus_buffer = function(buf_idx)
-    for idx, bufinfo in ipairs(get_loaded_buffers()) do
+    for idx, bufinfo in ipairs(get_listed_buffers()) do
         if idx == buf_idx then
             vim.cmd("b " .. bufinfo.buf_id)
         end
@@ -120,5 +117,17 @@ for i = 1, 5, 1 do
     vim.keymap.set("n", "<leader>" .. i, function() focus_buffer(i) end, { desc = "Focus buffer no. " .. i })
 end
 
-M.Init()
+v.nvim_create_autocmd("VimEnter", {
+    once = true,
+    callback = function()
+        M.Init()
+        M.update_buffer(v.nvim_buf_get_name(v.nvim_get_current_buf()))
+
+        v.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+            group = v.nvim_create_augroup("loaded_buffers", { clear = true }),
+            callback = function(opt) M.update_buffer(opt.file) end
+        })
+    end
+})
+
 return M
