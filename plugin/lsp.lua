@@ -146,12 +146,12 @@ vim.lsp.config.rust_analyzer = {
 }
 vim.lsp.enable('rust_analyzer')
 
--- Nushell
-vim.lsp.config.nushell = {
-    cmd = { 'nu', '--lsp' },
-    filetypes = { 'nu' },
+-- Fish LSP Config fish-lsp
+vim.lsp.config.fish_ls = {
+    cmd = { 'fish-lsp', 'start' },
+    filetypes = { 'fish' },
 }
-vim.lsp.enable('nushell')
+vim.lsp.enable('fish_ls')
 
 -- Vala LS Config [vala-language-server]
 vim.lsp.config.vala_ls = {
