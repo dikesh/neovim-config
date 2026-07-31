@@ -49,7 +49,7 @@ kmset('n', "<leader>sg", function() Snacks.picker.grep() end, { desc = "Search w
 kmset('n', "<leader>sh", function() Snacks.picker.help() end, { desc = "Seach Help Tags" })
 kmset('n', "<leader>sr", function() Snacks.picker.resume() end, { desc = "Telescope Resume" })
 kmset({ 'n', 'x' }, "<leader>sw", function() Snacks.picker.grep_word() end, { desc = "Visual selection or word" })
-kmset('n', "<leader>sl", function() Snacks.picker.lines() end, { desc = "Buffer Lines" })
+kmset('n', "<leader>sl", function() Snacks.picker.lines({ matcher = { fuzzy = false } }) end, { desc = "Buffer Lines" })
 kmset('n', "<leader>sd", function() Snacks.picker.diagnostics_buffer() end, { desc = "Show Diagnostics" })
 kmset('n', "<leader>sD", function() Snacks.picker.diagnostics() end, { desc = "Show Diagnostics" })
 kmset('n', "<leader>su", function() Snacks.picker.undo() end, { desc = "Undo History" })
