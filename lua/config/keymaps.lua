@@ -9,6 +9,7 @@ kmset("n", "<A-k>", ":m .-2<CR>==", { desc = "[M]ove [U]p" })
 kmset("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "[M]ove [B]lock [D]own" })
 kmset("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "[M]ove [B]lock [U]p" })
 kmset("n", "<leader>sf", "<CMD>source %<CR>", { desc = "[S]ource [F]ile" })
+kmset("n", "<leader>rr", "<CMD>restart<CR>", { desc = "Restart Neovim" })
 
 -- Add / Delete brackets / quotes around
 local kv = {
@@ -27,10 +28,3 @@ for _, v in pairs(kv) do
     kmset("v", "<leader>a" .. v[1], "c" .. v[2] .. "<ESC>P", { desc = "Add " .. v[2] .. " around" })
     kmset("n", "<leader>d" .. v[1], "di" .. v[1] .. "a<BS><BS><ESC>p", { desc = "Delete " .. v[2] .. " around" })
 end
-
--- Restart with session restore
-vim.keymap.set('n', '<leader>rr', function()
-    local session = vim.fn.stdpath('state') .. '/restart_session.vim'
-    vim.cmd('mksession! ' .. vim.fn.fnameescape(session))
-    vim.cmd('restart source ' .. vim.fn.fnameescape(session))
-end, { desc = 'Restart Neovim' })
