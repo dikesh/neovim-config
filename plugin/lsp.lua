@@ -111,21 +111,112 @@ vim.lsp.config.json_ls = {
 }
 vim.lsp.enable('json_ls')
 
--- TS LS Config [typescript-language-server]
-vim.lsp.config.ts_ls = {
-    init_options = { hostInfo = 'neovim' },
-    cmd = { 'typescript-language-server', '--stdio' },
-    filetypes = {
-        'javascript',
-        'javascriptreact',
-        'javascript.jsx',
-        'typescript',
-        'typescriptreact',
-        'typescript.tsx',
+-- Vue LSP
+-- ◍ vue-language-server
+-- ◍ typescript-language-server
+-- ◍ unocss-language-server
+-- ◍ eslint-lsp
+
+local vue_language_server_path =
+    vim.fn.stdpath("data") .. "/mason/packages" .. "/vue-language-server/node_modules/@vue/language-server"
+
+
+vim.lsp.config("ts_ls", {
+    cmd = { "typescript-language-server", "--stdio" },
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+    init_options = {
+        plugins = {
+            {
+                name = "@vue/typescript-plugin",
+                location = vue_language_server_path,
+                languages = { "vue" },
+            },
+        },
     },
-    root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
+    root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
+})
+
+vim.lsp.config("vue_ls", {
+    cmd = { "vue-language-server", "--stdio" },
+    filetypes = { "vue" },
+    root_markers = { "package.json", ".git" },
+
+    on_init = function(client)
+        client.handlers["tsserver/request"] = function(_, result, context)
+            local ts_clients = vim.lsp.get_clients({
+                bufnr = context.bufnr,
+                name = "ts_ls",
+            })
+
+            if #ts_clients == 0 then
+                vim.notify(
+                    "Could not find vtsls client required by vue_ls",
+                    vim.log.levels.ERROR
+                )
+                return
+            end
+
+            local ts_client = ts_clients[1]
+            local param = unpack(result)
+            local id, command, payload = unpack(param)
+
+            ts_client:exec_cmd(
+                {
+                    title = "vue_request_forward",
+                    command = "typescript.tsserverRequest",
+                    arguments = { command, payload },
+                },
+                { bufnr = context.bufnr },
+                function(_, r)
+                    local response_data = {
+                        { id, r and r.body }
+                    }
+                    client:notify("tsserver/response", response_data)
+                end
+            )
+        end
+    end,
+})
+
+vim.lsp.config("unocss", {
+    cmd = { "unocss-language-server", "--stdio" },
+    filetypes = {
+        "html",
+        "vue",
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+    },
+    root_markers = { "uno.config.ts", "uno.config.js", "uno.config.mjs", "package.json", ".git" },
+})
+
+vim.lsp.config.eslint = {
+    cmd = { 'vscode-eslint-language-server', '--stdio' },
+    filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue' },
+    root_markers = {
+        'eslint.config.js',
+        'eslint.config.mjs', 'eslint.config.ts',
+        '.eslintrc.js',
+        'package.json',
+    },
+    settings = {
+        validate = 'on',
+        useESLintClass = false,
+        experimental = { useFlatConfig = true },
+        codeActionOnSave = { enable = false, mode = 'all' },
+        format = true,
+        quiet = false,
+        onIgnoredFiles = 'off',
+        rulesCustomizations = {},
+        run = 'onType',
+        problems = { shortenToSingleLine = false },
+        nodePath = '',
+        workingDirectory = { mode = 'location' },
+    },
 }
-vim.lsp.enable('ts_ls')
+
+vim.lsp.enable({ "ts_ls", "vue_ls", "unocss", "eslint" })
 
 -- HTML LS Config [html-lsp]
 vim.lsp.config.html_ls = {
@@ -183,7 +274,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         kmset('n', '<leader>ca', function() vim.lsp.buf.code_action() end, opts)
 
         -- Format on save
-        if client:supports_method('textDocument/formatting') then
+        if client:supports_method('textDocument/formatting') and client.name ~= 'vue_ls' then
             -- Format the current buffer on save
             vim.api.nvim_create_autocmd('BufWritePre', {
                 buffer = args.buf,
