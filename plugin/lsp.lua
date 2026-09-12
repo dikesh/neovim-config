@@ -274,13 +274,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
         kmset('n', '<leader>ca', function() vim.lsp.buf.code_action() end, opts)
 
         -- Format on save
-        if client:supports_method('textDocument/formatting') and client.name ~= 'vue_ls' then
-            -- Format the current buffer on save
+        if client.name ~= 'vue_ls' then
             vim.api.nvim_create_autocmd('BufWritePre', {
                 buffer = args.buf,
                 group = vim.api.nvim_create_augroup('lsp-actions', { clear = false }),
                 callback = function()
-                    vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
+                    if client:supports_method('textDocument/formatting') then
+                        vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
+                    end
                 end,
             })
         end
