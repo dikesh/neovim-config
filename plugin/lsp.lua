@@ -80,21 +80,12 @@ vim.lsp.config.ruff = {
 }
 vim.lsp.enable('ruff')
 
--- Pyright LS Config [pyright]
-vim.lsp.config.pyright = {
-    cmd = { "pyright-langserver", "--stdio" },
+-- ty Server Config [ty]
+vim.lsp.config.ty = {
+    cmd = { "ty", "server" },
     filetypes = { "python" },
-    settings = {
-        python = {
-            analysis = {
-                autoSearchPaths = true,
-                diagnosticMode = "openFilesOnly",
-                useLibraryCodeForTypes = true
-            }
-        }
-    }
 }
-vim.lsp.enable('pyright')
+vim.lsp.enable('ty')
 
 -- Terraform LS Config [terraform-ls]
 vim.lsp.config.tf_ls = {
