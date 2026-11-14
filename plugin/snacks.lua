@@ -28,7 +28,21 @@ require("snacks").setup {
                     }
                 }
             }
-        }
+        },
+        win = {
+            input = {
+                keys = {
+                    ["<Tab>"] = { "list_down", mode = { "i", "n" } },
+                    ["<S-Tab>"] = { "list_up", mode = { "i", "n" } },
+                },
+            },
+            list = {
+                keys = {
+                    ["<Tab>"] = "list_down",
+                    ["<S-Tab>"] = "list_up",
+                },
+            },
+        },
     },
     words = { notify_end = false },
 }
@@ -41,7 +55,7 @@ kmset('n', "]w", function() Snacks.words.jump(1, false) end, { desc = "Next Refe
 kmset('n', "<leader>e", function() Snacks.explorer.open() end, { desc = "Open Explorer" })
 kmset('n', "<M-C-p>", function() Snacks.picker() end, { desc = "Snacks Picker" })
 -- Picker
-kmset('n', "<C-p>", function() Snacks.picker.smart() end, { desc = "Find Files" })
+kmset('n', "<C-p>", function() Snacks.picker.smart({ filter = { cwd = true } }) end, { desc = "Find Files" })
 kmset('n', "<leader>sf", function() Snacks.picker.files() end, { desc = "Find Files" })
 kmset({ 'n', 'v' }, "<leader>:", function() Snacks.picker.command_history() end, { desc = "Command History" })
 kmset('n', "<leader>/", function() Snacks.picker.git_grep() end, { desc = "Search with Grep" })
